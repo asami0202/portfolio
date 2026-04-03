@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tomo | 業務デザイン</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif+JP:wght@400;500&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #FAF8F4;
+    --sand: #F0EBE0;
+    --teal: #2A7A6F;
+    --teal-light: #E4F0EE;
+    --teal-dark: #1A5049;
+    --terra: #C4602A;
+    --text: #1E1E1C;
+    --muted: #6B6A66;
+    --border: #E0DAD0;
+  }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.8;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1.2rem 3rem;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(250,248,244,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-brand { font-family: 'Noto Serif JP', serif; font-size: 1.15rem; font-weight: 500; color: var(--teal-dark); letter-spacing: 0.05em; }
+  .nav-links { display: flex; gap: 2rem; }
+  .nav-links a { font-size: 0.85rem; text-decoration: none; color: var(--muted); letter-spacing: 0.08em; font-weight: 400; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--teal); }
+
+  /* HERO */
+  .hero {
+    padding: 9rem 3rem 5rem;
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+  }
+  .hero-label {
+    font-size: 0.75rem; letter-spacing: 0.15em; color: var(--terra); font-weight: 500;
+    text-transform: uppercase; margin-bottom: 1.2rem;
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .hero-label::before { content: ''; display: inline-block; width: 28px; height: 1px; background: var(--terra); }
+  .hero h1 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 500; line-height: 1.4;
+    color: var(--teal-dark); margin-bottom: 1.5rem;
+  }
+  .hero h1 em { font-style: italic; color: var(--terra); font-family: 'Cormorant Garamond', serif; font-size: 1.2em; }
+  .hero-sub { font-size: 1rem; color: var(--muted); max-width: 440px; margin-bottom: 2.5rem; line-height: 1.9; }
+  .hero-cta {
+    display: inline-block; padding: 0.85rem 2.2rem;
+    background: var(--teal); color: #fff;
+    text-decoration: none; font-size: 0.88rem; font-weight: 500; letter-spacing: 0.1em;
+    border-radius: 2px; transition: background 0.2s;
+  }
+  .hero-cta:hover { background: var(--teal-dark); }
+  .hero-card {
+    background: var(--sand); border-radius: 4px; padding: 2.5rem;
+    border-left: 3px solid var(--teal);
+  }
+  .hero-card p {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.05rem; line-height: 1.9; color: var(--teal-dark); margin-bottom: 1.5rem;
+  }
+  .hero-stat { display: flex; gap: 2rem; margin-top: 1.5rem; }
+  .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 600; color: var(--teal); line-height: 1; }
+  .stat-lbl { font-size: 0.75rem; color: var(--muted); letter-spacing: 0.04em; margin-top: 0.2rem; }
+
+  /* SECTION SHARED */
+  section { padding: 5rem 3rem; }
+  .container { max-width: 1100px; margin: 0 auto; }
+  .section-header { margin-bottom: 3.5rem; }
+  .section-tag {
+    font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--terra); font-weight: 500; margin-bottom: 0.8rem;
+  }
+  .section-title {
+    font-family: 'Noto Serif JP', serif; font-size: 2rem; font-weight: 500;
+    color: var(--teal-dark); line-height: 1.4;
+  }
+
+  /* PHILOSOPHY */
+  .philosophy { background: var(--teal-dark); }
+  .philosophy .section-tag { color: #A8D5CD; }
+  .philosophy .section-title { color: #fff; }
+  .philosophy-body { color: rgba(255,255,255,0.8); font-size: 1rem; max-width: 680px; margin-bottom: 3rem; line-height: 1.9; }
+  .philosophy-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .phil-card {
+    background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 4px; padding: 1.8rem;
+  }
+  .phil-num { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; color: var(--teal); line-height: 1; margin-bottom: 1rem; }
+  .phil-card h3 { color: #fff; font-size: 1rem; font-weight: 500; margin-bottom: 0.6rem; letter-spacing: 0.05em; }
+  .phil-card p { color: rgba(255,255,255,0.65); font-size: 0.88rem; line-height: 1.8; }
+
+  /* CASE STUDIES */
+  .cases { background: var(--cream); }
+  .case-block {
+    border: 1px solid var(--border); border-radius: 4px;
+    overflow: hidden; margin-bottom: 2.5rem;
+  }
+  .case-header {
+    background: var(--sand); padding: 2rem 2.5rem;
+    display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;
+  }
+  .case-tag { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--terra); font-weight: 500; margin-bottom: 0.5rem; }
+  .case-title { font-family: 'Noto Serif JP', serif; font-size: 1.45rem; font-weight: 500; color: var(--teal-dark); line-height: 1.5; }
+  .case-badge {
+    background: var(--teal-light); color: var(--teal-dark);
+    font-size: 0.75rem; padding: 0.35rem 0.9rem; border-radius: 2px; font-weight: 500; white-space: nowrap;
+  }
+  .case-body { padding: 2.5rem; }
+  .case-row { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 2rem; }
+  .case-col h4 { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--terra); margin-bottom: 1rem; font-weight: 500; }
+  .case-col ul { list-style: none; padding: 0; }
+  .case-col ul li { padding: 0.4rem 0; font-size: 0.93rem; color: var(--muted); border-bottom: 1px solid var(--border); display: flex; gap: 0.6rem; align-items: flex-start; line-height: 1.7; }
+  .case-col ul li::before { content: '–'; color: var(--border); flex-shrink: 0; margin-top: 0.05rem; }
+  .results-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+  .result-item {
+    background: var(--teal-light); border-radius: 3px; padding: 1.2rem 1.5rem;
+    display: flex; align-items: flex-start; gap: 0.8rem;
+  }
+  .result-check { color: var(--teal); font-size: 1rem; flex-shrink: 0; margin-top: 0.1rem; }
+  .result-text { font-size: 0.88rem; color: var(--teal-dark); line-height: 1.7; font-weight: 500; }
+  .approach-box {
+    background: var(--sand); border-left: 3px solid var(--teal);
+    border-radius: 0 3px 3px 0; padding: 1.5rem 2rem; margin: 1.5rem 0;
+  }
+  .approach-box p { font-size: 0.93rem; color: var(--teal-dark); line-height: 1.8; }
+  .approach-box strong { font-weight: 500; }
+
+  /* PROFILE */
+  .profile { background: var(--sand); }
+  .profile-grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: 4rem; align-items: start; }
+  .profile-avatar {
+    width: 90px; height: 90px; border-radius: 50%;
+    background: var(--teal); display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: #fff; font-weight: 600;
+    margin-bottom: 1.5rem;
+  }
+  .profile-name { font-family: 'Noto Serif JP', serif; font-size: 1.8rem; font-weight: 500; color: var(--teal-dark); }
+  .profile-role { color: var(--muted); font-size: 0.88rem; margin-top: 0.3rem; margin-bottom: 1.5rem; line-height: 1.8; }
+  .profile-quote {
+    font-family: 'Noto Serif JP', serif; font-size: 1rem;
+    color: var(--teal-dark); border-left: 2px solid var(--teal); padding-left: 1rem;
+    line-height: 1.9;
+  }
+  .profile-right p { color: var(--muted); font-size: 0.95rem; margin-bottom: 1.5rem; line-height: 1.9; }
+  .exp-list { margin: 2rem 0; }
+  .exp-list h4 { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--terra); font-weight: 500; margin-bottom: 1rem; }
+  .exp-item { display: flex; gap: 0.8rem; padding: 0.6rem 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; color: var(--text); line-height: 1.7; }
+  .exp-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); flex-shrink: 0; margin-top: 0.6rem; }
+  .tech-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+  .tech-tag {
+    background: #fff; border: 1px solid var(--border);
+    font-size: 0.78rem; padding: 0.3rem 0.8rem; border-radius: 2px; color: var(--muted);
+  }
+
+  /* CTA */
+  .cta-section {
+    background: var(--teal); text-align: center; padding: 5rem 3rem;
+  }
+  .cta-section h2 { font-family: 'Noto Serif JP', serif; font-size: 2rem; font-weight: 500; color: #fff; margin-bottom: 1rem; line-height: 1.5; }
+  .cta-section p { color: rgba(255,255,255,0.8); font-size: 0.97rem; max-width: 500px; margin: 0 auto 2.5rem; line-height: 1.9; }
+  .cta-btn {
+    display: inline-block; padding: 1rem 2.5rem;
+    background: #fff; color: var(--teal-dark); font-weight: 500; font-size: 0.9rem;
+    text-decoration: none; border-radius: 2px; letter-spacing: 0.08em;
+    transition: opacity 0.2s;
+  }
+  .cta-btn:hover { opacity: 0.88; }
+
+  /* FOOTER */
+  footer { background: var(--teal-dark); padding: 2rem 3rem; text-align: center; }
+  footer p { color: rgba(255,255,255,0.45); font-size: 0.8rem; }
+
+  .divider { height: 1px; background: var(--border); margin: 2rem 0; }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 3rem; gap: 2.5rem; }
+    section { padding: 3.5rem 1.5rem; }
+    .philosophy-grid { grid-template-columns: 1fr; }
+    .case-row { grid-template-columns: 1fr; gap: 1.5rem; }
+    .profile-grid { grid-template-columns: 1fr; gap: 2rem; }
+  }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+  .hero-label, .hero h1, .hero-sub, .hero-cta { animation: fadeUp 0.7s ease both; }
+  .hero-label { animation-delay: 0.1s; }
+  .hero h1 { animation-delay: 0.2s; }
+  .hero-sub { animation-delay: 0.32s; }
+  .hero-cta { animation-delay: 0.44s; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">Asami — 業務デザイン</div>
+  <div class="nav-links">
+    <a href="#services">サービス</a>
+    <a href="#cases">実績紹介</a>
+    <a href="#profile">プロフィール</a>
+    <a href="#contact">お問い合わせ</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div>
+    <div class="hero-label">Business Process Consultant</div>
+    <h1>業務を楽にしたいけれど、<br>何から手をつければ<br><em>いいか分からない。</em></h1>
+    <p class="hero-sub">
+      IT企業・金融業・コールセンターなど、15年間さまざまな現場の「困った」に向き合い続けてきました。
+      その経験を活かし、ExcelやAIツールを使って、あなたの"ムダな時間"をスッキリ整理します。
+    </p>
+    <a href="#cases" class="hero-cta">実績を見る</a>
+  </div>
+  <div class="hero-card">
+    <p>「ツールやシステムを導入する前に、まず業務を整理することを大切にしています。」</p>
+    <div class="divider"></div>
+    <div class="hero-stat">
+      <div class="stat-item">
+        <div class="stat-num">15</div>
+        <div class="stat-lbl">年の現場経験</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">85%</div>
+        <div class="stat-lbl">集計作業時間削減</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">0</div>
+        <div class="stat-lbl">転記ミス件数</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PHILOSOPHY -->
+<section class="philosophy" id="services">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">My Approach</div>
+      <div class="section-title" style="color: #fff;">まず整理する。<br>それから作る。</div>
+    </div>
+    <p class="philosophy-body">
+      業務が回らなくなる原因は、作業量そのものではなく、情報や判断、ToDoが整理されていないことにあるケースが多いです。
+      AIを活用しながら業務を整理し、「何をやるか」「何をやらないか」を見極めたうえで、今お使いの環境に合った形を設計します。
+    </p>
+    <div class="philosophy-grid">
+      <div class="phil-card">
+        <div class="phil-num">01</div>
+        <h3>整理する</h3>
+        <p>ツールを触る前に、業務の実態をまず丁寧にマッピングします。</p>
+      </div>
+      <div class="phil-card">
+        <div class="phil-num">02</div>
+        <h3>見極める</h3>
+        <p>何を自動化し、何を人が判断し、何をやめるかを一緒に決めます。</p>
+      </div>
+      <div class="phil-card">
+        <div class="phil-num">03</div>
+        <h3>設計する</h3>
+        <p>今ある環境を活かして、現場が無理なく続けられる仕組みを作ります。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CASE STUDIES -->
+<section class="cases" id="cases">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">Freelance Work</div>
+      <div class="section-title">フリーランスとしての実績紹介</div>
+    </div>
+
+    <!-- Case 1 -->
+    <div class="case-block">
+      <div class="case-header">
+        <div>
+          <div class="case-tag">実績 01 — 飲食業</div>
+          <div class="case-title">飲食店向け｜予約Webアプリによる業務自動化</div>
+        </div>
+        <div class="case-badge">Google Apps Script · Google Sheets · Calendar</div>
+      </div>
+      <div class="case-body">
+        <div class="case-row">
+          <div class="case-col">
+            <h4>抱えていた課題（Before）</h4>
+            <ul>
+              <li>予約の入口が電話・メールなどに分散</li>
+              <li>繁忙時間帯は電話対応できず取りこぼしが発生</li>
+              <li>メール予約は必須項目確認で何度もやり取りが必要</li>
+              <li>対応漏れ・確認ミスが起きやすい</li>
+              <li>DXに多くのコストはかけられない</li>
+              <li>ITが苦手なスタッフでも使えるか不安</li>
+            </ul>
+          </div>
+          <div class="case-col">
+            <h4>業務整理・要件整理（上流工程）</h4>
+            <ul>
+              <li>どの予約なら自動化できるか</li>
+              <li>どの予約は人が判断すべきか</li>
+              <li>繁忙期・定休日・当日の扱い</li>
+              <li>大人数予約の考え方（席配置・食材確保）</li>
+            </ul>
+            <div class="approach-box" style="margin-top: 1.2rem;">
+              <p><strong>方針：</strong>「すべてを自動化しない」という判断を明確にし、自動化と人の判断を分ける設計を重視しました。</p>
+            </div>
+          </div>
+        </div>
+
+        <h4 style="font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--terra); font-weight: 500; margin-bottom: 1.2rem;">実装内容（After）</h4>
+        <div class="case-row">
+          <div class="case-col">
+            <ul>
+              <li>24時間いつでも予約受付</li>
+              <li>予約枠の時間・人数制限を自動制御</li>
+              <li>定休日・当日・年末年始の受付不可日を自動制御</li>
+              <li>条件外予約はメール相談に自動誘導</li>
+            </ul>
+          </div>
+          <div class="case-col">
+            <ul>
+              <li>予約情報をスプレッドシートで一元管理</li>
+              <li>Googleカレンダーと自動同期</li>
+              <li>自動返信メール送信</li>
+              <li>電話予約はワンクリックでカレンダー登録</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="results-grid">
+          <div class="result-item"><div class="result-check">✓</div><div class="result-text">予約の取りこぼしを大幅に削減</div></div>
+          <div class="result-item"><div class="result-check">✓</div><div class="result-text">繁忙時間帯の電話対応ストレスを軽減</div></div>
+          <div class="result-item"><div class="result-check">✓</div><div class="result-text">予約対応の属人化を防止</div></div>
+          <div class="result-item"><div class="result-check">✓</div><div class="result-text">オーナーがリアルタイムで営業状況を把握</div></div>
+          <div class="result-item"><div class="result-check">✓</div><div class="result-text">スタッフも無理なく運用可能</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Case 2 -->
+    <div class="case-block">
+      <div class="case-header">
+        <div>
+          <div class="case-tag">実績 02 — 金融業</div>
+          <div class="case-title">製造業｜定期レポート作成（KPI集計）の自動化</div>
+        </div>
+        <div class="case-badge">Power Automate Desktop · Excel · Power Query</div>
+      </div>
+      <div class="case-body">
+        <div class="case-row">
+          <div class="case-col">
+            <h4>抱えていた課題（Before）</h4>
+            <ul>
+              <li>月次・週次のKPI集計に数時間かかる</li>
+              <li>複数システムからデータをコピー＆ペースト</li>
+              <li>転記ミス・計算ミスのリスク</li>
+              <li>集計担当者の属人化</li>
+            </ul>
+          </div>
+          <div class="case-col">
+            <h4>業務整理・要件整理</h4>
+            <ul>
+              <li>どのデータがどこにあるか</li>
+              <li>どの集計が本当に必要か</li>
+              <li>どの部分を自動化すべきか</li>
+            </ul>
+            <div class="approach-box" style="margin-top: 1.2rem;">
+              <p><strong>方針：</strong>「定型処理はすべてを完全自動化する」という判断を明確にしました。</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="results-grid">
+          <div class="result-item"><div class="result-check">✓</div><div class="result-text">集計作業時間を約85%削減</div></div>
+          <div class="result-item"><div class="result-check">✓</div><div class="result-text">転記ミスがゼロに</div></div>
+          <div class="result-item"><div class="result-check">✓</div><div class="result-text">属人化を解消</div></div>
+          <div class="result-item"><div class="result-check">✓</div><div class="result-text">担当者が本来の分析業務に集中できるように</div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROFILE -->
+<section class="profile" id="profile">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">Profile</div>
+      <div class="section-title">プロフィール</div>
+    </div>
+    <div class="profile-grid">
+      <div class="profile-left">
+        <div class="profile-avatar">A</div>
+        <div class="profile-name">Asami</div>
+        <div class="profile-role">業務プロセスコンサルタント<br></div>
+        <div class="profile-quote">
+          「業務を『作る前に、整理・可視化する』ことを大切にしています。
+          大きなシステムを入れることや、すべてを自動化することが、
+          必ずしも正解だとは考えていません。」
+        </div>
+      </div>
+      <div class="profile-right">
+        <p>
+          ツールやシステムを導入する前に、まず行うのは業務の整理と状況の見える化です。
+          AIを活用しながら情報を整理し、GoogleやMicrosoftなど、すでに使っている環境を活かした無理のない仕組みを設計しています。
+        </p>
+        <p>
+          ITやDXに苦手意識がある方でも、安心してご相談いただけるよう、
+          専門用語をできるだけ使わず、一緒に考える姿勢を大切にしています。
+        </p>
+
+        <div class="exp-list">
+          <h4>これまでの経験</h4>
+          <div class="exp-item"><div class="exp-dot"></div>業務プロセスの見直しと改善提案、実施支援</div>
+          <div class="exp-item"><div class="exp-dot"></div>社内業務のDX化推進</div>
+          <div class="exp-item"><div class="exp-dot"></div>データ分析・実績集計・各種レポートや資料作成</div>
+          <div class="exp-item"><div class="exp-dot"></div>業務の整理・標準化・改善</div>
+          <div class="exp-item"><div class="exp-dot"></div>KPIデータ分析と改善サポート</div>
+          <div class="exp-item"><div class="exp-dot"></div>システム・アプリ開発の企画・要件定義から実装まで一貫サポート</div>
+          <div class="exp-item"><div class="exp-dot"></div>新規サービスの企画・運用サポート</div>
+        </div>
+
+        <div class="exp-list">
+          <h4>技術スタック</h4>
+          <div class="tech-grid">
+            <span class="tech-tag">Google Apps Script</span>
+            <span class="tech-tag">Google Workspace</span>
+            <span class="tech-tag">Microsoft Excel</span>
+            <span class="tech-tag">Power Automate</span>
+            <span class="tech-tag">Power Query</span>
+            <span class="tech-tag">Claude AI</span>
+            <span class="tech-tag">ChatGPT</span>
+            <span class="tech-tag">Dify</span>
+            <span class="tech-tag">Midjourney</span>
+            <span class="tech-tag">Genspark</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <h2>まずは、業務の「困った」を<br>一緒に整理しませんか？</h2>
+  <p>ツールを決める前に、現状をヒアリングするところから始めます。お気軽にご相談ください。</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 Asami — 業務デザイン &nbsp;|&nbsp; asa AI Lab &nbsp;|&nbsp; </p>
+</footer>
+
+</body>
+</html>
